@@ -44,8 +44,7 @@ class RawEmail < ActiveRecord::Base
   end
 
   def mail!
-    #MailHandler.mail_from_raw_email(data)
-    Mail.new(data)
+    MailHandler.mail_from_raw_email(data)
   end
 
   def data=(d)
