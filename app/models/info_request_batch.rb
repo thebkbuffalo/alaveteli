@@ -57,12 +57,17 @@ class InfoRequestBatch < ActiveRecord::Base
              :embargo_duration => draft.embargo_duration)
   end
 
+  # Return a list of public bodies which haven't been sent the info request yet.
+  def unsent_public_bodies
+    public_bodies - info_requests.map(&:public_body)
+  end
+
   # Create a batch of information requests, returning a list of public bodies
   # that are unrequestable from the initial list of public body ids passed.
   def create_batch!
     unrequestable = []
     created = []
-    public_bodies.each do |public_body|
+    unsent_public_bodies.each do |public_body|
       if public_body.is_requestable?
         info_request = nil
         ActiveRecord::Base.transaction do
