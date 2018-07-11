@@ -2,6 +2,7 @@
 
 ## Highlighted Features
 
+* Ability to customise no-reply address Regexp (Gareth Rees)
 * Extend time before closing requests to all responses (Gareth Rees)
 * Add a footer to the Admin layout with useful links to alaveteli.org (Gareth
   Rees)
@@ -56,6 +57,12 @@
   `RESTRICT_NEW_RESPONSES_ON_OLD_REQUESTS_AFTER_MONTHS` has been increased from
   `2 *` to `4 *`. Please check that this config value is acceptable for your
   site's usage profile.
+* The no-reply address handling can be customised in your theme. You can do this
+  in `lib/model_patches.rb` by assigning a `Regexp` of your choice to
+  `ReplyToAddressValidator.no_reply_regexp`. e.g.
+  `ReplyToAddressValidator.no_reply_regexp = /hello/`. Note that this only acts
+  on the local part of an email address (before the `@`) rather than the full
+  address.
 
 ### Changed Templates
 
